@@ -4,17 +4,17 @@ import json
 with open('precipitation.json') as file:
     station_data_json = json.load(file)
 
-Seattle = []
+Seattle_list = []
 
 for dictionary in station_data_json:
     if  dictionary["station"] == "GHCND:US1WAKG0038":
-        Seattle.append(dictionary)
-print(Seattle)
+        Seattle_list.append(dictionary)
+print(Seattle_list)
 
 #1.3
 
 measurements = [0,0,0,0,0,0,0,0,0,0,0,0]
-for measurement in Seattle:
+for measurement in Seattle_list:
     date = str(measurement['date'])
     split_date=date.split("-") #gives a list of dates splitted by commas (y,m,d)
     month = split_date [1]
@@ -25,17 +25,19 @@ for measurement in Seattle:
 print(measurements)
 
 #1.4
-Seattle_precipation = {}
-Seattle_precipation["name"] : "Seattle_station"
+Seattle = {}
+Seattle["station"] = "GHCND:US1WAKG0038"
+Seattle["state"] = "WA"
+Seattle["total_monthly_precipation"] = measurements
+print(Seattle)
 
-for entry in measurements:
-    if entry not in  Seattle_precipation:
-        Seattle_precipation["Precipation_per_month"] : entry
-    
-    
+Locations_dict = {}
+Locations_dict["Seattle"] = Seattle
 
-print(Seattle_precipation)
+with open('results.json', 'w', encoding = 'utf-8') as file:
+    json.dump(Locations_dict,file, indent=4)
 
 
 
+#1.5
 
