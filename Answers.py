@@ -37,7 +37,29 @@ Locations_dict["Seattle"] = Seattle
 with open('results.json', 'w', encoding = 'utf-8') as file:
     json.dump(Locations_dict,file, indent=4)
 
+#1.5 Committed
 
+#2.1
+total_yearly_percipation = 0
+for entry in Seattle["total_monthly_precipation"]:
+    total_yearly_percipation += entry
+print(total_yearly_percipation)
 
-#1.5
+#2.2
+relative_monthly_percipation = [0,0,0,0,0,0,0,0,0,0,0,0]
+index = 0
+for element in Seattle["total_monthly_precipation"]:
+    relative_monthly_percipation[index] = element/total_yearly_percipation
+    index +=1
 
+print(relative_monthly_percipation)
+
+Seattle["total_yearly_percipation"] = total_yearly_percipation
+Seattle["relative_monthly_percipation"] = relative_monthly_percipation
+
+print(Locations_dict)
+
+with open('results.json', 'w', encoding = 'utf-8') as file:
+    json.dump(Locations_dict,file, indent=4)
+
+#2.3 Commited
