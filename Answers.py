@@ -14,7 +14,7 @@ print(Seattle_list)
 #1.3
 
 measurements = [0,0,0,0,0,0,0,0,0,0,0,0]
-for measurement in Seattle_list:
+for measurement in Seattle_list: 
     date = str(measurement['date'])
     split_date=date.split("-") #gives a list of dates splitted by commas (y,m,d)
     month = split_date [1]
@@ -63,3 +63,36 @@ with open('results.json', 'w', encoding = 'utf-8') as file:
     json.dump(Locations_dict,file, indent=4)
 
 #2.3 Commited
+
+
+3.1
+from csv import DictReader
+with open('stations.csv') as file:
+    stations = DictReader(file)
+    stations_list = list(stations)
+
+import json
+with open('precipitation.json') as file:
+    station_data_json = json.load(file)
+
+index = 0
+position= 0
+names = []
+for name in stations_list:
+    names.append(stations_list[index]['Station'])
+    
+print(names)
+def weather_data (names_1):
+    
+    Location_list = []
+    names_1=names[1]
+    for dictionary in station_data_json:
+        if  dictionary["station"] == names_1:
+            Location_list.append(dictionary)
+    print(Location_list)
+
+
+
+
+
+
